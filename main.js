@@ -1,3 +1,37 @@
+function templateNota(){
+    const div = document.createElement('div')
+div.className = 'nota'
+div.id='nota'
+div.contentEditable = true
+const texto = document.createTextNode('edita la nota')
+
+div.appendChild(texto)
+const root = document.getElementById('root')
+
+root.appendChild(div)
+btnAgregar.disabled= true
+// creamos el btn de guardar
+const btnGuardar = document.createElement('button')
+const textBtnGuardar= document.createTextNode('Guardar Nota')
+btnGuardar.onclick= function (){
+    // alert('nota guardada')
+    setLocalInfo(nota)
+    document.getElementById('nota')
+    textBtnGuardar.remove()
+    btnAgregar.disabled= false 
+}
+btnGuardar.appendChild(textBtnGuardar)
+root.appendChild(btnGuardar)
+
+}
+
+const btnAgregar = document.createElement('button')
+btnAgregar.addEventListener('click',templateNota)
+const textBtnAgregar = document.createTextNode('Agrega nota')
+btnAgregar.appendChild(textBtnAgregar)
+root.appendChild(btnAgregar)
+
+
 document.addEventListener('DOMContentLoaded',function(){
     showInfo();
 })
@@ -26,8 +60,8 @@ function getInfo(){
 function setLocalInfo(nota){
     // guardaría la info en localStorage
     const clave = Date.now();
-  localStorage.setItem(clave,getInfo(nota))
-   
+localStorage.setItem(clave,getInfo(nota))
+
 }
 
 // leerla y sacarla por pantalla
@@ -58,5 +92,5 @@ function cleanInfo(){
     // limpiar el local storage y limpiar la pantaal
     // Elimina todos los elementos
 localStorage.clear();
-    console.log('En localstorage no hay notas')
+    console.log('En localstorage no hay notas') 
 }
